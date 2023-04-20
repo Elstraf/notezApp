@@ -7,7 +7,12 @@ interface NoteStore {
   addNote: (note: NoteState) => void;
   deleteNote: (id: string) => void;
   updateNote: (id: string, note: NoteState) => void;
-  filterNotes: (filter: string) => void;
+}
+
+interface CopyNoteStore {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  clearSearchQuery: () => void;
 }
 
 export const useNoteStore = create<NoteStore>()(
@@ -28,18 +33,15 @@ export const useNoteStore = create<NoteStore>()(
           ),
         }));
       },
-      filterNotes: (filter: string) => {
-        set((state) => ({
-          notes: state.notes.filter(
-            (note) =>
-              note.title.toLowerCase().includes(filter.toLowerCase()) ||
-              note.body.toLowerCase().includes(filter.toLowerCase())
-          ),
-        }));
-      },
     }),
     {
       name: "notes",
     }
   )
 );
+
+export const useCopyNoteStore = create<CopyNoteStore>((set) => ({
+  searchQuery: "",
+  setSearchQuery: (query) => set({ searchQuery: query }),
+  clearSearchQuery: () => set({ searchQuery: "" }),
+}));

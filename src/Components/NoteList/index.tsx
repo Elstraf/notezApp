@@ -1,4 +1,5 @@
-import { useNoteStore } from "../../store";
+import { useEffect } from "react";
+import { useCopyNoteStore, useNoteStore } from "../../store";
 import NoteCard from "../NoteCard";
 
 interface NoteListProps {
@@ -8,13 +9,44 @@ interface NoteListProps {
 const NoteList = ({ smallList }: NoteListProps) => {
   const notes = useNoteStore((state) => state.notes);
 
-  console.log("Notes", notes);
+  const query = useCopyNoteStore((state) => state.searchQuery);
+
+  const clearQuery = useCopyNoteStore((state) => state.clearSearchQuery);
+
+  useEffect(() => {
+    return () => clearQuery();
+  }, []);
+
+  if (query) {
+    const filteredNotes = notes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(query.toLowerCase()) ||
+        note.body.toLowerCase().includes(query.toLowerCase())
+    );
+    return (
+      <div className="md:relative md:-mt-16">
+        <div className="flex gap-8 flex-wrap">
+          {filteredNotes.length >= 1 &&
+            filteredNotes.map((note, id) => (
+              <div key={id}>
+                <NoteCard
+                  title={note.title}
+                  id={note.uuid}
+                  body={note.body}
+                  date={note.date}
+                />
+              </div>
+            ))}
+        </div>
+      </div>
+    );
+  }
 
   if (smallList) {
     return (
       <div className="md:relative md:-mt-32">
         <h3 className=" text-2xl font-bold mb-7">Saved notes</h3>
-        <div className="flex gap-8 justify-between flex-wrap">
+        <div className="flex gap-8  flex-wrap">
           {notes.length >= 1 &&
             notes.map((note, id) => (
               <div key={id}>

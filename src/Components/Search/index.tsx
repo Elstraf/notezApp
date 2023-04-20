@@ -1,15 +1,19 @@
-import { useNoteStore } from "../../store";
+import { useCopyNoteStore } from "../../store";
 
 const Search = () => {
-  const filter = useNoteStore((state) => state.filterNotes);
+  const setSearchQuery = useCopyNoteStore((state) => state.setSearchQuery);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    filter(e.target.value);
+    setSearchQuery(e.target.value);
   };
 
   return (
     <>
-      <input type="text" onChange={handleChange} placeholder="Search" />
+      <input
+        type="text"
+        onChange={(e) => handleChange(e)}
+        placeholder="Search"
+      />
     </>
   );
 };
