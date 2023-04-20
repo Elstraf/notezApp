@@ -24,8 +24,15 @@ const NoteList = ({ smallList }: NoteListProps) => {
         note.body.toLowerCase().includes(query.toLowerCase())
     );
     return (
-      <div className="md:relative md:-mt-16">
-        <div className="flex gap-8 flex-wrap">
+      <div className={`md:relative md:-mt-16 ${smallList ? " md:-mt-32" : ""}`}>
+        {smallList && <h3 className=" text-2xl font-bold mb-7">Saved notes</h3>}
+        <div
+          className={`${
+            smallList
+              ? " flex gap-8 flex-wrap"
+              : "grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:justify-items-start  justify-items-center  gap-y-4"
+          }`}
+        >
           {filteredNotes.length >= 1 &&
             filteredNotes.map((note, id) => (
               <div key={id}>
@@ -46,7 +53,7 @@ const NoteList = ({ smallList }: NoteListProps) => {
     return (
       <div className="md:relative md:-mt-32">
         <h3 className=" text-2xl font-bold mb-7">Saved notes</h3>
-        <div className="flex gap-8  flex-wrap">
+        <div className="flex gap-8 flex-wrap">
           {notes.length >= 1 &&
             notes.map((note, id) => (
               <div key={id}>
