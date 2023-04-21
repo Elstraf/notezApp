@@ -109,14 +109,19 @@ const NoteForm = ({ selectedNote, id }: NoteFormProps) => {
     <div className=" relative z-10 -mt-32">
       <div className="flex flex-col">
         <form className={`flex flex-col ${styles.form}`}>
-          <input
-            className=" text-2xl text-black placeholder:text-black mb-7 bg-transparent font-bold"
-            type="text"
-            placeholder="New note"
-            name="title"
-            value={note.title}
-            onChange={(e) => handleChange(e)}
-          />
+          <div className="flex items-baseline">
+            <input
+              className=" text-2xl text-black placeholder:text-black mb-7 bg-transparent font-bold w-min"
+              type="text"
+              placeholder="New note"
+              name="title"
+              value={note.title}
+              onChange={(e) => handleChange(e)}
+            />
+            {note.date !== "" && (
+              <p className="text-2xl text-black placeholder:text-black mb-7 bg-transparent font-bold">{`- Created ${note.date}`}</p>
+            )}
+          </div>
           <textarea
             placeholder="Start typing here..."
             rows={14}
