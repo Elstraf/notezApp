@@ -6,6 +6,7 @@ module.exports = {
       height: {
         hero: "281px",
         noteCard: "180px",
+        buttonText: "16px",
       },
       width: {
         noteCard: "180px",

@@ -72,7 +72,13 @@ const NoteCard = ({ id, title, body, date }: NoteCardProps) => {
       </div>
       <div className="font-bold text-lg mb-2 px-4">{title}</div>
       <div className="flex-1 text-sm text-grey px-4">
-        <p className="line-clamp-3 leading-[17px]">{body}</p>
+        {/* <p className="line-clamp-3 leading-[17px]">{body}</p> */}
+        <textarea
+          value={body}
+          className="h-full line-clamp-3 w-full resize-none disabled:bg-white pb-2"
+          readOnly
+          disabled
+        />
       </div>
       <div className=" text-[10px] text-grey px-4 pb-1">{date}</div>
 

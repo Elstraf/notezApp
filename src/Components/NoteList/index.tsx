@@ -17,6 +17,16 @@ const NoteList = ({ smallList }: NoteListProps) => {
     return () => clearQuery();
   }, []);
 
+  if (notes.length === 0) {
+    return (
+      <div className="flex h-[300px] justify-center items-center">
+        <h1 className="text-2xl font-bold">
+          No Notes Found! How about making your first one!
+        </h1>
+      </div>
+    );
+  }
+
   if (query) {
     const filteredNotes = notes.filter(
       (note) =>
