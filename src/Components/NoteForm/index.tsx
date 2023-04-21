@@ -123,7 +123,7 @@ const NoteForm = ({ selectedNote, id }: NoteFormProps) => {
           <textarea
             placeholder="Start typing here..."
             rows={14}
-            className=" shadow-md rounded-xl p-8 resize-none drop-shadow-md "
+            className=" shadow-md rounded-xl p-8 resize-none drop-shadow-md text-grey "
             name="body"
             value={note.body}
             onChange={(e) => handleChange(e)}
