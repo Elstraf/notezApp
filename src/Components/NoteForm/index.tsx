@@ -22,6 +22,36 @@ const defaultNoteState: NoteState = {
   uuid: "",
 };
 
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const monthsOfYear = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const getDaySuffix = (day: number) => {
+  if (day > 3 && day < 21) return "th";
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+};
+
 const NoteForm = ({ selectedNote, id }: NoteFormProps) => {
   const [note, SetNote] = useState<NoteState>(defaultNoteState);
 
@@ -42,11 +72,13 @@ const NoteForm = ({ selectedNote, id }: NoteFormProps) => {
 
     if (!selectedNote) {
       const date = new Date();
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
+      const dayOfMonth = date.getDate();
+      const daySuffix = getDaySuffix(dayOfMonth);
+      const dayOfWeek = daysOfWeek[date.getDay()];
+      const monthOfYear = monthsOfYear[date.getMonth()];
       const year = date.getFullYear();
 
-      const noteDate = `${day}/${month}/${year}`;
+      const noteDate = `${dayOfWeek} ${dayOfMonth}${daySuffix} ${monthOfYear} ${year}`;
 
       note["date"] = noteDate;
 
