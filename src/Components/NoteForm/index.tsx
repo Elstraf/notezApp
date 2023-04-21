@@ -57,8 +57,6 @@ const NoteForm = ({ selectedNote, id }: NoteFormProps) => {
 
   const updateNote = useNoteStore((state) => state.updateNote);
 
-  console.log(note);
-
   useEffect(() => {
     if (selectedNote) {
       SetNote((prev) => ({ ...prev, ...selectedNote }));
@@ -106,12 +104,12 @@ const NoteForm = ({ selectedNote, id }: NoteFormProps) => {
   };
 
   return (
-    <div className=" relative z-10 -mt-32">
+    <div className=" relative z-10 md:-mt-32 pt-4 sm:pt-0">
       <div className="flex flex-col">
         <form className={`flex flex-col ${styles.form}`}>
-          <div className="flex items-baseline">
+          <div className="flex items-baseline flex-col lg:flex-row overflow-hidden">
             <input
-              className=" text-2xl text-black placeholder:text-black mb-7 bg-transparent font-bold w-min"
+              className=" text-2xl text-black placeholder:text-black mb-7 bg-transparent font-bold"
               type="text"
               placeholder="New note"
               name="title"
@@ -125,13 +123,13 @@ const NoteForm = ({ selectedNote, id }: NoteFormProps) => {
           <textarea
             placeholder="Start typing here..."
             rows={14}
-            className=" shadow-md rounded-xl p-8 resize-none "
+            className=" shadow-md rounded-xl p-8 resize-none drop-shadow-md "
             name="body"
             value={note.body}
             onChange={(e) => handleChange(e)}
           />
         </form>
-        <div className="flex gap-4 self-end mt-8">
+        <div className="flex gap-4 sm:self-end mt-8">
           <button
             onClick={(e) => handleSubmit(e)}
             className="p-2 bg-yellow h-10 rounded-3xl font-bold text-lg hover:text-yellow hover:bg-black transition-all duration-300  w-[142px] text-[14px]"

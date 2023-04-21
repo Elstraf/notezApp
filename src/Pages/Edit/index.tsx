@@ -16,9 +16,13 @@ const Edit = () => {
     <>
       <Header />
       <Container>
-        <div className="grid grid-cols-2 gap-8 ">
-          <NoteList smallList />
-          <NoteForm selectedNote={selectedNote[0]} id={id} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="order-2 md:order-1">
+            <NoteList smallList />
+          </div>
+          <div className="order-1">
+            <NoteForm selectedNote={selectedNote[0]} id={id} />
+          </div>
         </div>
       </Container>
     </>
